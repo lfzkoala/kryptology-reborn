@@ -10,6 +10,7 @@ import (
 	"time"
 )
 
+// test suite
 func TestVDF(t *testing.T) {
 	t.Run("New VDF", testNewVDF)
 	t.Run("Execute VDF", testExecuteVDF)
