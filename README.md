@@ -73,6 +73,7 @@ This abstraction is currently only used in DKLs18 implementation.
   - [Feldman](pkg/sharing/feldman.go)
 - [Verifiable encryption](pkg/verenc)
 - [ZKP Schnorr](pkg/zkp/schnorr)
+- Wesolowski VDF
 
 
 ## Contributing
@@ -83,7 +84,7 @@ This abstraction is currently only used in DKLs18 implementation.
  
  
 ## [References](docs/)
-- [[GG20] _One Round Threshold ECDSA with Identifiable Abort._](https://eprint.iacr.org/2020/540.pdf)
+- [[GG20] _One Round Threshold ECDSA with Identifiable Abort._](https://eprint.iacr.org/2020/540.pdf) (Deprecated since serious bug found in 2022)
 - [[specV5] _One Round Threshold ECDSA for Coinbase._](docs/Coinbase_Pseudocode_v5.pdf)
 - [[EL20] _Eliding RSA Group Membership Checks._](docs/rsa-membership.pdf) [src](https://www.overleaf.com/project/5f9c3b0624a9a600012037a3)
 - [[P99] _Public-Key Cryptosystems Based on Composite Degree Residuosity Classes._](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.112.4035&rep=rep1&type=pdf)
