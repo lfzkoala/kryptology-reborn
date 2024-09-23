@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-// test suite
+// test suite to control all cases.
 func TestVDF(t *testing.T) {
 	t.Run("New VDF", testNewVDF)
 	t.Run("Execute VDF", testExecuteVDF)
