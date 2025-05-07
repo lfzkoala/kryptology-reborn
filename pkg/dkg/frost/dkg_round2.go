@@ -103,7 +103,7 @@ func (dp *DkgParticipant) Round2(bcast map[uint32]*Round1Bcast, p2psend map[uint
 		cj := dp.Curve.Scalar.Hash(msg)
 		// Check equation
 		if cj.Cmp(bcast[id].Ci) != 0 {
-			return nil, fmt.Errorf("Hash check fails for participant with id %d\n", id)
+			return nil, fmt.Errorf("hash check fails for participant with id %d\n", id)
 		}
 
 		// Step 5 - FeldmanVerify

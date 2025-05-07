@@ -69,8 +69,12 @@ func (dp *DkgParticipant) Round1(secret []byte) (*Round1Bcast, Round1P2PSend, er
 	}
 
 	// Check number of participants
-	if uint32(len(dp.otherParticipantShares)+1) > dp.feldman.Limit || uint32(len(dp.otherParticipantShares)+1) < dp.feldman.Threshold {
-		return nil, nil, fmt.Errorf("length of dp.otherParticipantShares + 1 should be equal to feldman limit")
+	participantCount := uint32(len(dp.otherParticipantShares) + 1)
+	if participantCount > dp.feldman.Limit || participantCount < dp.feldman.Threshold {
+		return nil, nil, fmt.Errorf(
+			"invalid number of participants: got %d, expected between %d and %d",
+			participantCount, dp.feldman.Threshold, dp.feldman.Limit,
+		)
 	}
 
 	// If secret is nil, sample a new one
@@ -137,7 +141,15 @@ func (dp *DkgParticipant) Round1(secret []byte) (*Round1Bcast, Round1P2PSend, er
 	// Step 7 - P2PSend f_i(j) to each participant Pj and keep (i, f_j(i)) for himself
 	p2pSend := make(Round1P2PSend, len(dp.otherParticipantShares))
 	for id := range dp.otherParticipantShares {
-		p2pSend[id] = shares[id-1]
+		shareIdx := id - 1
+		if int(shareIdx) >= len(shares) {
+			return nil, nil, fmt.Errorf("no share for participant id %d (index %d out of range)", id, shareIdx)
+		}
+		share := shares[shareIdx]
+		if share == nil {
+			return nil, nil, fmt.Errorf("share for participant id %d is nil", id)
+		}
+		p2pSend[id] = share
 	}
 
 	// Update internal state
